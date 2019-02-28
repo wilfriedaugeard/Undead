@@ -1,0 +1,124 @@
+\documentclass[12pt]{report}
+
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{authblk}
+\usepackage{wasysym}
+
+\title{Rapport Undead}
+\author[ ]{Romain Vergé}
+\author[ ]{Wilfried Augeard}
+\author[ ]{Axel Faugas}
+\affil[ ]{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Rapport du projet technologique sur le jeu Undead, groupe TM3E.
+\end{abstract}
+
+\tableofcontents
+
+
+
+\section{Introduction}
+\begin{normalsize}
+Durant notre deuxième année en licence informatique, nous avons réalisé un projet ayant pour objectif de mettre en application les connaissances acquises jusqu'à lors. Nous avons aussi appris à utiliser certains outils collaboratifs (GIT) mais aussi certains outils amis du développeur (cf valgrind, GDB, CMake, gcov...).
+
+Le rendu final devait être un jeu de réflexion ( semblable au Sudoku ) dans lequel il faut placer des monstres dans une grille en fonction de certains critères.
+Nous avons commencé cette UE de Projet Technologique en apprenant à utiliser GitHub. Nous avons aussi appris à écrire des "Makefile", des fichiers permettant de générer des exécutables en tapant UNE SEULE commande : "make".
+\end{normalsize}
+
+
+\chapter{La V1 en mode texte : undead\_text.c le début du coup de foudre ! $\heartsuit$}
+
+\section{Synthèse}
+\begin{normalsize}
+Ayant déjà la librairie founie par les enseignents nous avons pu commencer l'implémentation du fichier principal de notre jeu c'est-à-dire rendre le jeu fonctionnel sur terminal. Nous avons du gérer l'interaction avec l'utilisateur (scanf) ainsi que la gestion de l'affichage sur terminal (cf. fonction display). Nous avons aussi du implémenter deux autres fonctions pour initialiser le jeu. Nous avons du créer un Makefile pour pouvoir générer notre jeu plus facilement.  
+\end{normalsize}
+
+\section{Analyses critiques}
+\begin{normalsize}
+Le début fût difficile, en effet la familiarisation avec les différentes fonctions de la bibliothèques ainsi que le manque d'expériences nous a empêché de commencer efficacement.
+Nous avons recontré quelques difficultés pour créer notre Makefile. Ce système de génération d'executable étant nouveau.
+\end{normalsize}
+
+\section{Bilan}
+\begin{normalsize}
+Après s'être familiarisé avec les fonctions fournies et le jeu, nous avons pu sortir un première version sommaire du jeu. L'utilisation de Makefile nous a été bénéfique en terme de temps. 
+\end{normalsize}
+
+\chapter{Implémentation de la bibliothèque libgame}
+\section{Synthèse}
+\begin{normalsize}
+Durant les premières semaines, nous avons implémenté la bibliothèque principale de notre jeu (game.c). Celle-ci contient les fonctions principales de notre jeu.
+Concernant la répartition des tâches, nous avons réparti les fonctions équitablement entre les quatres membres du groupe. Certains ayant fini leurs fonctions avant, ils ont aidé les autres sur les fonctions les plus diffciles (cf. current\_nb\_seen). Pour créer la structure du jeu, on a commencé par mettre les éléments qui nous semblaient indispensables. Par la suite, nous en avons ajouté/supprimé selon les besoins ressentis au cours du projet. 
+\end{normalsize}
+\section{Analyses critiques}
+\begin{normalsize}
+Certaines fonctions fûrent plus faciles à implémenter que d'autres. L'implémentation de la structure fût assez rapide, la première version étant proche de la finale.   
+\end{normalsize}
+\section{Bilan}
+\begin{normalsize}
+
+\end{normalsize}
+
+
+\chapter{Extension de la bibliothèque}
+\section{Synthèse}
+\section{Analyses critiques}
+\section{Bilan}
+\section{Pistes d'améliorations}
+
+\chapter{Version texte}
+\section{Synthèse}
+\section{Analyses critiques}
+\section{Bilan}
+\section{Pistes d'améliorations}
+
+\chapter{Solveur}
+\section{Synthèse}
+\section{Analyses critiques}
+\section{Bilan}
+\section{Pistes d'améliorations}
+
+\chapter{Version graphique}
+\section{Synthèse}
+\begin{normalsize}
+Pour la Version 2 du jeu Undead, nous avons implémenté une version graphique. Celle-ci est codée en SDL2, et présente les fonctionnalités suivantes :
+\begin{itemize}
+\item[•] Ecran d'accueil
+\item[•] Menu règles
+\item[•] Menu contenant 19 niveaux prédéfinis, et un 20ème aléatoire
+\item[•] Case pendant la partie mettant en avant le monstre actuellement choisi
+\item[•] Affichage dynamique du nombre de monstres à placer
+\item[•] "You win" affiché à l'écran lorsque la partie est gagnée
+\item[•] Redimensionnement
+\end{itemize}
+\end{normalsize}
+
+\section{Analyses critiques}
+\section{Bilan}
+\section{Pistes d'améliorations}
+
+\chapter{Tests}
+\section{Synthèse}
+\section{Analyse critique}
+\section{Bilan}
+\section{Pistes d'améliorations}
+
+%\chapter{Bonus Android}
+%\section{Synthèse}
+%\section{Analyses critiques}
+%\section{Bilan}
+%\section{Pistes d'améliorations}
+
+\chapter{Commentaires critiques personnels}
+\section{Romain Vergé}
+\section{Wilfried Augeard}
+\section{Axel Faugas}
+
+\end{document}
