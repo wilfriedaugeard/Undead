@@ -1,0 +1,225 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{authblk}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{enumitem}
+
+\title{Rapport Undead}
+\author[ ]{Romain Vergé}
+\author[ ]{Wilfried Augeard}
+\author[ ]{Axel Faugas}
+\affil[ ]{}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Rapport du projet technologique sur le jeu Undead, groupe TM3E.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+Durant notre deuxième année de licence informatique, nous avons réalisé un projet ayant pour objectif de mettre en application les connaissances acquises jusqu'à lors. Nous avons appris à utiliser certains outils collaboratifs (GIT) mais aussi des outils amis du développeur (cf valgrind, GDB, CMake, gcov...). Il a par ailleurs été utile d'apprendre à écrire des "Makefile", des fichiers permettant de générer des exécutables en tapant UNE SEULE commande : "make".
+
+Le rendu final devait être un jeu de réflexion (semblable au Sudoku) dans lequel il faut placer des monstres dans une grille en fonction de certains critères.
+
+Nous avons commencé cette UE de Projet Technologique en apprenant à utiliser Git.
+
+\section{La V1 en mode texte : undead\_text.c le début du coup de foudre ! $\heartsuit$}
+
+\subsection{Synthèse}
+Ayant déjà la librairie fournie par les enseignants, nous avons pu commencer l'implémentation du fichier principal de notre jeu, afin de rendre le jeu fonctionnel sur terminal.
+
+Il a été nécessaire de gérer l'interaction avec l'utilisateur (scanf) ainsi que la gestion de l'affichage sur terminal (cf. fonction display). Nous avons aussi dû implémenter deux autres fonctions pour initialiser le jeu, et avons créé un Makefile pour pouvoir générer notre jeu plus facilement.
+
+\subsection{Analyses critiques}
+Le début a été difficile, en effet la familiarisation avec les différentes fonctions de la bibliothèque ainsi que le manque d'expérience nous a empêché de commencer efficacement.
+Nous avons rencontré quelques difficultés pour créer notre Makefile, ce système de génération d'exécutable étant nouveau.
+
+\subsection{Bilan}
+Après s'être familiarisés avec les fonctions fournies et le jeu, nous avons pu sortir une première version sommaire. L'utilisation de Makefile nous a été bénéfique en terme de temps.
+
+\section{Implémentation de la bibliothèque libgame : Une répartition des tâches efficace !}
+\subsection{Synthèse}
+Durant les premières semaines, nous avons implémenté la bibliothèque principale de notre jeu (game.c). Celle-ci contient les fonctions principales de notre jeu.
+
+Concernant la répartition des tâches, nous avons réparti les fonctions équitablement entre les quatre membres du groupe. Certains ayant fini leurs fonctions en avance, ils ont aidé les autres sur les fonctions les plus difficiles (cf. current\_nb\_seen).
+
+Pour créer la structure du jeu, on a commencé par mettre les éléments qui nous semblaient indispensables. Par la suite, nous en avons ajouté/supprimé selon les besoins ressentis au cours du projet.
+
+\subsection{Analyses critiques}
+Certaines fonctions on été plus faciles à implémenter que d'autres. Aussi, la répartition des tâches s'étant faite selon la cohérence des fonctions entre elles (load\_game, copy\_game, new\_game...), nous avions chacun le même nombre de fonctions à écrire, mais leurs complexités n'étaient pas homogènes.
+
+L'implémentation de la structure a été assez rapide, la première version étant proche de la version finale.
+
+\subsection{Bilan}
+Notre répartition du travail s'est révélée efficace, mais est cependant restée modulable : plusieurs membres ont pu coder une même fonction ensemble si l'un ou l'autre était en difficulté. De plus, nous avons pu apprendre à segmenter notre code, c'est à dire diviser notre code en plusieurs fonctions au lieu de surcharger la fonction principale, ce qui permet de gagner en efficacité et en lisibilité.
+
+
+\section{Extension de la bibliothèque : le client est capricieux ! }
+\subsection{Synthèse}
+Après avoir créé notre première version du jeu, les prérogatives ont changé. Le client ne voulait plus une taille fixe, mais une taille variable qui permet de modifier la difficulté du jeu. Par ailleurs, un nouveau monstre ainsi que deux nouveaux types de miroirs ont fait leur entrée : le spirit, et les miroirs horizontaux/verticaux. Quand un rayon arrive horizontalement sur un miroir vertical, il fait demi-tour. Lorsqu'un rayon arrive horizontalement sur un miroir horizontal, il poursuit son chemin horizontalement comme si la case était vide.
+
+\subsection{Analyses critiques}
+Ces différents ajouts et changements ont eu plusieurs impacts sur notre code : tout d'abord, nous avons dû implémenter plusieurs nouvelles fonctions (new\_game\_ext, setup\_new\_game\_ext...). Celles-ci étant des extensions, elles devaient nécessairement faire appel aux fonctions originelles. De plus, il a fallu aussi modifier le "header" de notre libgame (game.c) afin qu'il reste fidèle à notre jeu.
+
+Enfin, il a été nécessaire d'effectuer de nouveaux tests afin de vérifier la fiabilité de notre implémentation.
+
+\subsection{Bilan}
+D'un côté, il n'a pas été évident d'effectuer tous les changements nécessaires pour la V2. En effet, nous avions prévu certains changements, comme la modification de la taille de la grille, mais n'avions aucune idée des autres évolutions. Nous avons pu facilement identifier les modifications à apporter, mais la mise en place de celles-ci a parfois été assez floue (compréhension à l'intérieur du groupe).
+
+D'un autre côté, nous avons réussi à gérer cette évolution alors qu'un membre du groupe avait perdu sa motivation et ne venait quasiment plus en cours.
+
+\section{Version texte : Notre première version finale}
+\subsection{Synthèse}
+La version 2 ayant déjà été implémentée, nous pouvions jouer. Seulement nous ne savions pas si des erreurs internes se produisaient, hors celles-ci auraient pu nuire à l'intégrité du jeu dans le temps. L'implémentation de la version texte finale a donc consisté à détecter ces erreurs au moyen de logiciels tels que valgrind et gdb.
+
+Enfin, un travail consciencieux a été effectué concernant la propreté du code, des commentaires, afin que la relecture par des tiers soit plus facile. Nous avons veillé à faire des commentaires permettant la génération d'une documentation Doxygen.
+
+\subsection{Analyses critiques}
+Cette partie a été moins intéressante que les autres. En effet, la détection d'erreurs est un domaine particulier, complètement différent de l'implémentation du jeu. Elle est néanmoins nécessaire, et nous avons vu que beaucoup d'erreurs avaient été détectées.
+
+Cette fois-ci, la répartition des tâches a été plus compliquée, car les tests (fuites mémoire notamment) se font sur la globalité du jeu. Il n'est pas forcément aisé de découper ces tâches en plus petites parties pour diviser le travail entre membres du groupe. Cependant, nous avons réussi à nous compléter et à bien détecter et réparer ensemble ces problèmes.
+
+\subsection{Bilan}
+En fin de compte, une personne du groupe s'est attelée à la propreté du code, tandis que les deux autres se sont penchées sur la détection d'erreurs. Aussi, suite à ce travail de groupe, nous devions individuellement évaluer le projet d'un autre groupe. Ainsi et pour la première fois, nous avons pu voir le code et le fonctionnement d'autres groupes (ainsi que leur avancée dans le projet). Ceci a été bénéfique pour nous, et nous a prouvé qu'il existe autant de façons de programmer que de programmeurs !
+
+\subsection{Pistes d'améliorations}
+Nous pourrions approfondir notre connaissance des logiciels gdb et valgrind, afin d'affiner les recherches d'erreurs et gagner du temps lorsque certaines erreurs apparaissent très générales (dans quelle partie précise du code se produisent-elles ?).
+
+\section{Solveur : L'apparition des cheveux blancs !}
+\subsection{Synthèse}
+Après avoir obtenu une version finale et optimale du jeu (avec le moins d'erreurs possibles), il était temps de s'attaquer au redoutable solveur. Pour pouvoir récupérer et stocker les grilles dans des fichiers il fallait avant tout implémenter les fonctions permettant de le faire. 
+
+Une fois tous les outils à notre disposition, nous nous sommes attaqués à l'algorithme de base constituant le solveur. La première version était en force brute "basique", testant tous les cas. Aux vues du temps que le solveur prenait à résoudre une grille, on a vite compris que l'on devait optimiser le code en éliminant les cas impossibles. Au final, le solveur était assez optimisé pour résoudre une grille de 6x7 en quelques secondes.
+
+\subsection{Analyses critiques}
+On appréhendait cette partie. En effet on ne voyait pas par où commencer mais le regard de chacun nous a permis de surmonter ce problème et de trouver une solution. Trouver l'algorithme de base était la tâche la plus dur sur cette partie. Par la suite l'optimisation a été plus amusante mais de plus en plus difficile.
+
+\subsection{Bilan}
+Au final ce travail, qui nous paraissait conséquent et difficile, a été plus simple que ce que l'on pensait. Être plusieurs à réfléchir sur le même algorithme nous a montré que chaque personne voit un problème sous un angle qui n'est pas forcément le nôtre.
+
+\subsection{Algorithme du solveur}
+Voici une brève idée de l'algorithme de base utilisé, chaque "option" du solveur
+(FIND\_ONE, NB\_SOL...) ayant ses spécificités propres :
+ 
+\vspace{5mm}
+\begin{itemize}[label=$\square$,leftmargin=0cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item On teste si la grille est remplie, si elle l'est:
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=1cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Si on a gagné on enregistre la solution et retourne le game. Sinon on retourne null
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=0cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Si elle n'est pas remplie:
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=1cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item si on est sur un miroir, on appelle le solveur sur la case suivante
+\item sinon:
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=2cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Pour chaque type de monstre:
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=3cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Tester si il n'y a pas déjà le nombre maximum de ce type placé sur la grille
+\item Si on ne dépasse pas les labels une fois le monstre posé:
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=4cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Rappeler la fonction avec le nouveau monstre placé. Tester le retour de la fonction: Si différent de null, retourner la solution.
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=3cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Enlever le monstre posé et replacer l'ancien monstre
+\end{itemize}
+\begin{itemize}[label=$\square$,leftmargin=2cm ,parsep=0cm,itemsep=0cm,topsep=0cm]
+\item Si aucune solution n'a été trouvée, écrire "NO SOLUTION" dans le fichier.
+\end{itemize}
+
+\subsection{Pistes d'améliorations}
+Le solveur peut être encore optimisé. Lorsque l'on essaie de limiter les cas à tester, on ne teste que les labels correspondant aux cases sur le bord de la grille. Pour tester les autres cases, il faudrait, pour chaque case, partir dans toutes les directions possibles et à l'endroit où l'on sort de la grille, tester le label. Une sorte de fonction current\_nb\_seen inversée en somme.
+
+\section{Version graphique : De toute beauté !}
+\subsection{Synthèse}
+Pour la Version 2 du jeu Undead, nous avons implémenté une version graphique. Celle-ci est codée en SDL2, et présente les fonctionnalités suivantes :
+
+\vspace{5mm}
+\begin{itemize}
+\item[•] Écran d'accueil avec animation
+\item[•] Menu règles
+\item[•] Menu contenant 19 niveaux prédéfinis, et un 20ème aléatoire
+\item[•] Case pendant la partie mettant en avant le monstre actuellement choisi
+\item[•] Affichage dynamique du nombre de monstres à placer
+\item[•] "You win" affiché à l'écran lorsque la partie est gagnée
+\item[•] Redimensionnement
+\end{itemize}
+
+Le code est découpé en 3 grandes parties. La première où la structure contenant l'environnement est créée et initialisée ainsi que détruite, la seconde concernant les rendus graphiques de chaque "écran" (menu, règles, jeu..), et la dernière concernant les événements sur chaque écran.
+
+Dans les deux dernières parties, on a une fonction principale Render et une fonction principale Process. Elles appellent les fonctions correspondantes selon l'état du jeu. 
+
+\subsection{Analyses critiques}
+Beaucoup de difficultés au niveau des collisions et de la gestion de la mémoire. Le fait que l'on appelle infiniement des fonctions qui allouent de la mémoire nous oblige à la libérer quand on en a plus besoin sinon le programme plante au bout de quelques secondes (erreur de segmentation). 
+
+La collision a posé des problèmes à cause du redimensionnement. Il a fallu reprendre le code à plusieurs reprises pour avoir un jeu fonctionnel quelque soit la taille de la fenêtre.
+
+\subsection{Bilan}
+Cette partie du projet conclut le travail effectué tout au long de l'année. La liberté donnée sur la SDL nous a permis d'avoir un rendu graphique personnel, à la fois pour ses graphismes mais aussi pour ses fonctionnalités.
+
+\subsection{Pistes d'améliorations}
+Il y a de nombreuses fonctionnalités que l'on pourrait ajouter, comme un bouton solve par exemple ou bien des transitions/animations lors du lancement des niveaux...
+
+
+\section{Tests : la pression monte !}
+\subsection{Synthèse}
+La phase de tests consiste à créer des fonctions permettant de tester les différentes failles potentielles de notre librairie libgame. C'est une étape compliquée où il faut penser à tous les cas possibles.
+
+\subsection{Analyse critique}
+Comme pour la création de la librairie libgame, nous avons réparti les fonctions à définir par groupements logiques. Cette partie du projet a été difficile, car beaucoup de bugs sont apparus, et même une fois que nous avons réussi à écarter tous ceux que nous avions trouvé, l'évaluation automatique de moodle en a trouvé d'autres.
+
+\subsection{Bilan}
+Il est compliqué d'évaluer chaque fonction dans son intégralité. Il y a des cas évidents que l'on voit apparaître rapidement, mais il y a aussi des cas plus fins, plus rares, que l'on n'imagine pas forcément. Tester un programme est donc un travail long et consciencieux.
+
+\subsection{Pistes d'améliorations}
+Il y aura toujours des améliorations à apporter : un programme sans faille n'existe pas, et nos tests seront toujours perfectibles. Cependant, nous pensons que l'expérience est dans ce domaine notre meilleure alliée, car à chaque phase de tests nous pouvons découvrir de nouveaux problèmes, qui parfois reviennent dans les projet suivants. Nous saurons donc directement les tester et nous gagnerons du temps pour approfondir notre batterie de tests.
+
+\section{Commentaires critiques personnels}
+\subsection{Romain Vergé}
+Très bon ressenti dans l'ensemble de l'UE. Celle-ci m'a apporté énormément de choses, telles que la gestion d'un projet sur du long terme, l'apprentissage de nouveaux outils, le travail en équipe, et pour finir, la gestion d'éventuelles erreurs dans un programme.
+
+Aussi, quelques points à améliorer selon moi :
+\begin{itemize}
+\item[•] Volume horaire de l'UE à augmenter à hauteur de 2h40 par semaine, ce qui permettrait d'étendre le projet sur plusieurs aspects comme le réseau, le web ou les bases de données.
+
+\item[•] Avoir une plus grande liberté au niveau de l'implémentation, c'est-à-dire par exemple ne pas avoir de fonctions pré-définies. Le groupe d'élèves pourrait se rendre compte par lui-même de quelles fonctions il a besoin, et définir le cahier des charges.
+
+\item[•] Il serait intéressant de diversifier les langages, et que l'on puisse choisir entre C, Python, ou des langages web par exemple. 
+\end{itemize}
+
+Enfin, je me suis rendu compte que je m'épanouis dans le développement de jeux vidéos et plus largement de logiciels.
+
+\subsection{Wilfried Augeard}
+Ce que je préfère dans la programmation est le fait de travailler sur un projet, la satisfaction d'obtenir quelque chose de concret. C'est ce que m'a apporté cette UE. J'ai découvert ce que c'était que d'avoir des contraintes comme le "caprice du client" ou tout simplement les dates limites. Cette UE m'a donné un premier aper\c{c}u du monde de l'entreprise (cahier des charges, temps à respecter, travail en équipe). J'ai vu que l'on ne travaille pas toujours avec des gens que l'on connaît, ou que les méthodes et rythmes de travail peuvent être différents. Il faut donc s'adapter et trouver un terrain d'entente avec tous les membres du groupe pour avancer sur le même chemin.
+
+Je pense qu'il faudrait plus d'heures de TM par semaine, car c'est une UE assez conséquente en temps de travail personnel et elle mérite d'être plus suivie, quitte à faire de plus gros projets. Peut-être proposer différents types de projets au départ. 
+
+\vspace{10mm}
+Je tiens à remercier les enseignants d'avoir organisé cette UE mais aussi de nous avoir apporté leurs bonnes humeurs et leurs aides tout au long de cette année.  
+\smiley
+
+\subsection{Axel Faugas}
+Tout d'abord, cette UE m'a permis de me rendre compte que le développement de jeux vidéos n'était pas du tout mon domaine. Ceci est une bonne chose car je n'en avais pas du tout conscience, et cela m'a permis de revoir mon orientation pour l'année prochaine. Cependant, j'ai découvert grâce à ce projet les joies et les peines qui se présentent lors d'un long projet en groupe. Une personne a abandonné, il a donc fallu rééquilibrer le projet, et parfois, entres membres, il est difficile de se comprendre et de mettre en place certaines pratiques en commun (notamment les pratiques d'indentation et de tenue du code).
+
+En revanche, on découvre les compétences de chacun dans les domaines abordés, et on voit aussi que ces compétences diffèrent d'un membre à l'autre : on peut donc apprendre des compétences des autres, et vice versa.
+
+Enfin, et comme dans toute équipe, il arrive que la motivation baisse à un moment, que l'on se trompe, que l'on fasse des erreurs, et c'est à ce moment que l'on voit à quel point la cohésion des membres est importante pour se soutenir les uns les autres.
+
+\vspace{10mm}
+\centering
+Merci à toute l'équipe enseignante pour leur accompagnement, leur aide et leur bonne humeur tout au long de ce projet.
+
+\end{document}
